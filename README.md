@@ -1,5 +1,7 @@
 # Policy-Renewal-Decisions
 
+A predictive model to automate underwriting decisions at policy renewal.
+
 ### Data Source :
 
 Simulated
@@ -26,7 +28,7 @@ Simulated
 
 * Cost Matrix applied to Decision Tree (C5.0 Model)
 
-### Result :
+###"Best" Model :
 
 The model with highest predictive accuracy (0.80) was the **Decision Tree (C5.0 Model) with the Cost Matrix** applied to it
 
