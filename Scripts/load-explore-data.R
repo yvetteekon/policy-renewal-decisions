@@ -145,5 +145,10 @@ scatter_plot <- function(i, j){
 with(train, scatter_plot(loss_ratio, irpm_value)) + 
   xlab("Loss Ratio") + ylab("IRPM Value")
 
+# Export data sets
+write.csv(train, file = "train.csv", row.names = FALSE)
+write.csv(test, file = "test.csv", row.names = FALSE)
+
 # Remove unwanted files
 rm(num_train, cat_train)
+
