@@ -28,7 +28,7 @@ Simulated
 
 ### Result :
 
-The model with highest predictive accuracy (0.80) was the **Decision Tree (C5.0 Model) with the cost matrix** applied to it
+The model with highest predictive accuracy (0.80) was the **Decision Tree (C5.0 Model) with the Cost Matrix** applied to it
 
 
 
