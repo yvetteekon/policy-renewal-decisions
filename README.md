@@ -1,6 +1,6 @@
 # Policy-Renewal-Decisions
 
-### Data :
+### Data Source :
 
 Simulated
 
@@ -26,7 +26,9 @@ Simulated
 
 * Cost Matrix applied to Decision Tree (C50 Model)
 
-The model with highest predictive accuracy (0.80) was the Decision Tree (C50 Model) with the cost matrix applied to it
+### Result :
+
+The model with highest predictive accuracy (0.80) was the ### Decision Tree (C50 Model) with the cost matrix ### applied to it
 
 
 
