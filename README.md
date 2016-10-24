@@ -18,17 +18,17 @@ Simulated
 
 ### Models Considered :
 
-* Decision Tree (C50 Model)
+* Decision Tree (C5.0 Model)
 
 * Random Forest Model
 
 * AdaBoost Model
 
-* Cost Matrix applied to Decision Tree (C50 Model)
+* Cost Matrix applied to Decision Tree (C5.0 Model)
 
 ### Result :
 
-The model with highest predictive accuracy (0.80) was the ### Decision Tree (C50 Model) with the cost matrix ### applied to it
+The model with highest predictive accuracy (0.80) was the <Decision Tree (C5.0 Model) with the cost matrix> applied to it
 
 
 
