@@ -99,7 +99,7 @@ p12 <- bar(cat_train$underwriter)
 pb <- plot_grid(p4, p5, p6, p7, p8, p9, p10,p11, p12,
                 labels = c("Policy Effective Year", "Month", "Coverage",
                            "Sales Manager", "State", "Loss Ratio Category",
-                           "IRPM Value", "Action", "Underwriting"),
+                           "IRPM Value", "Action", "Underwriter"),
                 label_size = 12, vjust = 1.5)
 title <- ggdraw() + draw_label("Univariate Visual Analysis: Categorical Variables",
                                fontface = "bold")

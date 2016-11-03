@@ -37,12 +37,6 @@ summary(combi$loss_ratio)
 combi <- combi[-c(1, 8)]
 
 # Feature Engineering
-# Coverage type
-levels(combi$coverage)
-combi$coverage_type <- NA
-combi$coverage_type[combi$coverage %in% c("auto", "home", "contents")] <- "personal"
-combi$coverage_type[combi$coverage %in% c("products", "building")] <- "commercial"
-
 # Season
 combi$season <- NA
 combi$season[combi$month %in% c("Mar", "Apr", "May")] <- "spring"
@@ -64,16 +58,27 @@ combi$region[combi$state %in%
 combi$region[combi$state %in% c("IL", "MN", "WI")] <- "midwest"
 combi$region[combi$state %in% c("NJ", "NY", "PA")] <- "northeast"
 
-# Risk category
-bin <- rpart(irpm_status ~ irpm_value, data = combi)
-summary(bin)
-fancyRpartPlot(bin)
-
 # Encode character variables as factors
 data.frame(sort(sapply(combi, class), decreasing = T))
-for (i in c(12:15)){
+for (i in c(12:14)){
   combi[, i] <- as.factor(combi[, i])
 }
+
+# Test "correlation" between variables season and quarter
+table(combi$quarter, combi$season)
+
+# Reodering levels of variables quarter and season
+combi$quarter <- ordered(combi$quarter, levels = c("first", "second", "third", "fourth"))
+combi$season <- ordered(combi$season, levels = c("spring", "summer", "fall", "winter"))
+
+tbl = matrix(data=c(887, 0, 0, 1766, 1776, 887, 0, 0, 0, 1759, 843, 0, 0, 0, 1725, 822), nrow=4, ncol=4, byrow=T)
+dimnames(tbl) = list(City=c("1st", "2nd", "3rd", "4th"), Gender=c("Spring", "Summer", "Fall", "Winter"))
+
+chi2 = chisq.test(tbl, correct=F)
+c(chi2$statistic, chi2$p.value) # p-value of 0.00 meaning there is an association.
+# I will drop variable quarter
+
+combi <- combi[-13]
 
 # Split data into train and test data sets
 # 80% of the sample size
@@ -99,7 +104,7 @@ options("digits" = 2)
 model_rf$confusion[, "class.error"]
 
 # Overall Accuracy rate
-((1 - 0.00802) + (1 - 0.59311) + (1 - 0.20292)) / 3 * 100 # 73%
+((1 - 0.0018) + (1 - 0.5520) + (1 - 0.2146)) / 3 * 100 # 74%
 
 # Improve Model Predictive Accuracy using Ensemble Methods
 # Model 3 : Adaptive Boosting (AdaBoost)
@@ -112,11 +117,11 @@ CrossTable(test$action, predict_boost, prop.chisq = FALSE, prop.c = FALSE, prop.
            dnn = c('Actual Decision', 'Predicted Decision'))
 
 # Accuracy rate
-round(((836 + 200 + 628)/ 2093 * 100), 2) # 79.50
+round(((836 + 199 + 636)/ 2093 * 100), 2) # 80
 
 # Penalty and Cost Matrix
 contrasts(train$action)
-# relevel(train$action, "add credit")
+# relevel(train$action, "no action")
 
 # Create cost matrix
 error_cost <- matrix(c(0,40,20,-5,0,10,5,30,0), nrow=3) 
@@ -131,4 +136,4 @@ predit_cost <- predict(model_cost, test)
 CrossTable(test$action, predit_cost, prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
            dnn = c('Actual', 'Predicted'))
 
-((836 + 85 + 760)/2093 * 100)  # 80%.
+((836 + 86 + 769)/2093 * 100)  # 81%.
