@@ -1,15 +1,37 @@
 # Policy-Renewal-Decisions
-A predictive model to automate underwriting decisions at policy renewal
 
-Data source : Simulated
+A predictive model to automate underwriting decisions at policy renewal.
 
-Data set characteristic : Multivariate
+### Data Source :
 
-Associated tasks : Classification
+Simulated
 
-Number of instances : 10465
+### Data Characteristics :
 
-Number of attributes : 13
+* Number of instances : 10,465
 
-Missing values : None
+* Number of attributes : 13
+
+* Missing values : None
+
+* Default task : Classification
+
+* Response data type : Multivariate
+
+### Models Considered :
+
+* Decision Tree (C5.0 Model)
+
+* Random Forest Model
+
+* AdaBoost Model
+
+* Cost Matrix applied to Decision Tree (C5.0 Model)
+
+###"Best" Model :
+
+The model with highest predictive accuracy (0.80) was the **Decision Tree (C5.0 Model) with the Cost Matrix** applied to it
+
+
+
 
