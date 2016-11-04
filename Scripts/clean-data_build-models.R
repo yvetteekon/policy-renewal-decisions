@@ -71,13 +71,14 @@ table(combi$quarter, combi$season)
 combi$quarter <- ordered(combi$quarter, levels = c("first", "second", "third", "fourth"))
 combi$season <- ordered(combi$season, levels = c("spring", "summer", "fall", "winter"))
 
-tbl = matrix(data=c(887, 0, 0, 1766, 1776, 887, 0, 0, 0, 1759, 843, 0, 0, 0, 1725, 822), nrow=4, ncol=4, byrow=T)
-dimnames(tbl) = list(City=c("1st", "2nd", "3rd", "4th"), Gender=c("Spring", "Summer", "Fall", "Winter"))
+# Contingency table and chi-square test of independence
+CrossTable(combi$quarter, combi$season, prop.chisq = FALSE, prop.c = FALSE,
+           prop.r = FALSE, dnn = c("Quarter", "Season"))
 
-chi2 = chisq.test(tbl, correct=F)
-c(chi2$statistic, chi2$p.value) # p-value of 0.00 meaning there is an association.
+chisq.test(combi$quarter, combi$season)
+# p-value < 2.2e-16 meaning there is an association.
+
 # I will drop variable quarter
-
 combi <- combi[-13]
 
 # Split data into train and test data sets
