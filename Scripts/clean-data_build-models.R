@@ -32,6 +32,15 @@ combi <- rbind(train, test)
 # Check for Missing values
 any(is.na(combi)) # no missing values
 
+# Check for "correlation" or measure of strength of association between 
+# variables loss_ratio and loss_ratio_category
+fit <- lm(loss_ratio ~ loss_ratio_category, data = combi)
+summary(fit)
+rsq <- summary(fit)$r.squared
+sqrt(rsq) # Correlation between observed loss_ratio and the ones predicted by the
+# model is 0.85
+boxplot(loss_ratio ~ loss_ratio_category, data = combi)
+
 # Remove variables loss ratio and policy_id
 summary(combi$loss_ratio)
 combi <- combi[-c(1, 8)]
@@ -125,16 +134,19 @@ contrasts(train$action)
 # relevel(train$action, "no action")
 
 # Create cost matrix
-error_cost <- matrix(c(0,40,20,-5,0,10,5,30,0), nrow=3) 
+error_cost <- matrix(c(0,40,20,5,0,10,5,30,0), nrow=3) 
 dimnames(error_cost) <- list("Actual" = c("add credit", "add debit", "no action"),
                              "Predicted" = c("add credit", "add debit", "no action"))
 error_cost
 
 # Apply the cost matrix to the tree
 model_cost <- C50::C5.0(train[-11], train$action, costs = error_cost) 
+summary(model_cost)
+
 predit_cost <- predict(model_cost, test)
 
 CrossTable(test$action, predit_cost, prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE,
            dnn = c('Actual', 'Predicted'))
 
 ((836 + 86 + 769)/2093 * 100)  # 81%.
+
