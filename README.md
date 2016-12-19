@@ -1,6 +1,6 @@
 # Policy-Renewal-Decisions
 
-A predictive model to automate underwriting decisions at policy renewal.
+A predictive model to automate underwriting decisions during policy renewal.
 
 ### Data Source :
 
