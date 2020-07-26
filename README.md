@@ -28,7 +28,7 @@ Simulated
 
 * Cost Matrix applied to Decision Tree (C5.0 Model)
 
-###"Best" Model :
+### "Best" Model :
 
 The model with highest predictive accuracy (0.80) was the **Decision Tree (C5.0 Model) with the Cost Matrix** applied to it
 
